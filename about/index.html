@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>About — Harsh Sharma</title>
+
+        <link rel="stylesheet" href="/assets/css/tokens.css" />
+        <link rel="stylesheet" href="/assets/css/base.css" />
+        <link rel="stylesheet" href="/assets/css/components.css" />
+        <link rel="stylesheet" href="/assets/css/page.css" />
+        <link rel="stylesheet" href="/assets/css/post.css" />
+
+        <script defer src="/assets/js/main-handler.js"></script>
+        <script defer src="/assets/js/post-handler.js"></script>
+    </head>
+
+    <body>
+        <div class="overlay" data-menu hidden>
+            <div class="overlay__backdrop" data-menu-close></div>
+
+            <div
+                class="overlay__panel"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Site menu"
+                tabindex="-1"
+                data-menu-panel
+            >
+                <div class="overlay__top">
+                    <div class="overlay__title">Menu</div>
+                    <button
+                        class="btn btn--small"
+                        type="button"
+                        data-menu-close
+                    >
+                        Close
+                    </button>
+                </div>
+
+                <div class="overlay__search">
+                    <label class="overlay__searchLabel" for="menu-post-search">
+                        Search posts
+                    </label>
+                    <input
+                        id="menu-post-search"
+                        type="search"
+                        placeholder="Search posts..."
+                        autocomplete="off"
+                        data-post-search
+                    />
+                    <div class="overlay__results" data-post-results></div>
+                </div>
+
+                <nav class="overlay__links" aria-label="Menu links"></nav>
+            </div>
+        </div>
+
+        <header class="topbar">
+            <div class="topbar__inner">
+                <a class="topbar__logo" href="/" aria-label="Home">
+                    <svg
+                        viewBox="0 0 140 120"
+                        xmlns="http://www.w3.org/2000/svg"
+                        role="img"
+                        aria-label="Typing logo"
+                    >
+                        <style>
+                            .bar {
+                                stroke: currentColor;
+                                stroke-width: 3;
+                                stroke-linecap: square;
+                            }
+                            .symbol {
+                                stroke: currentColor;
+                                fill: none;
+                                stroke-width: 5;
+                                stroke-linecap: square;
+                                stroke-linejoin: miter;
+                                opacity: 0;
+                            }
+
+                            .cursor {
+                                animation:
+                                    cursorBlink 1s steps(1) infinite,
+                                    cursorMove 14s steps(1, end) infinite;
+                                transform-box: fill-box;
+                                transform-origin: center;
+                            }
+                            /* --- Freeze-frame default (always) --- */
+                            .symbol {
+                                opacity: 1;
+                            } /* show all characters */
+                            .cursor {
+                                opacity: 1;
+                                transform: translateX(70px);
+                            } /* cursor after '&gt;' */
+
+                            /* --- Animate only when allowed --- */
+                            @media (prefers-reduced-motion: no-preference) {
+                                .symbol {
+                                    opacity: 0;
+                                } /* restore your animated behavior */
+                                .cursor {
+                                    animation:
+                                        cursorBlink 1s steps(1) infinite,
+                                        cursorMove 14s steps(1, end) infinite;
+                                    transform-box: fill-box;
+                                    transform-origin: center;
+                                }
+
+                                .pipe {
+                                    animation: showPipe 14s steps(1, end)
+                                        infinite;
+                                }
+                                .lt {
+                                    animation: showLT 14s steps(1, end) infinite;
+                                }
+                                .slash {
+                                    animation: showSlash 14s steps(1, end)
+                                        infinite;
+                                }
+                                .gt {
+                                    animation: showGT 14s steps(1, end) infinite;
+                                }
+                            }
+
+                            @keyframes cursorBlink {
+                                0%,
+                                49% {
+                                    opacity: 1;
+                                }
+                                50%,
+                                100% {
+                                    opacity: 0;
+                                }
+                            }
+
+                            /* Faster typing (done by 25%), same 5s hold, fast delete */
+                            @keyframes cursorMove {
+                                /* type (snappy jumps) */
+                                0% {
+                                    transform: translateX(0);
+                                } /* | */
+                                6% {
+                                    transform: translateX(15px);
+                                } /* before &lt; */
+                                12% {
+                                    transform: translateX(35px);
+                                } /* before / */
+                                18% {
+                                    transform: translateX(55px);
+                                } /* before &gt; */
+                                25% {
+                                    transform: translateX(70px);
+                                } /* after &gt; */
+
+                                /* hold (5s) */
+                                60.7% {
+                                    transform: translateX(70px);
+                                }
+
+                                /* tiny pause */
+                                68% {
+                                    transform: translateX(70px);
+                                }
+
+                                /* delete (fast) */
+                                90% {
+                                    transform: translateX(55px);
+                                }
+                                94% {
+                                    transform: translateX(35px);
+                                }
+                                97% {
+                                    transform: translateX(15px);
+                                }
+                                100% {
+                                    transform: translateX(0);
+                                }
+                            }
+
+                            /* Characters appear AFTER cursor lands */
+                            .pipe {
+                                animation: showPipe 14s steps(1, end) infinite;
+                            }
+                            .lt {
+                                animation: showLT 14s steps(1, end) infinite;
+                            }
+                            .slash {
+                                animation: showSlash 14s steps(1, end) infinite;
+                            }
+                            .gt {
+                                animation: showGT 14s steps(1, end) infinite;
+                            }
+
+                            @keyframes showPipe {
+                                0%,
+                                5.5% {
+                                    opacity: 0;
+                                }
+                                6%,
+                                99% {
+                                    opacity: 1;
+                                }
+                                99.5%,
+                                100% {
+                                    opacity: 0;
+                                }
+                            }
+                            @keyframes showLT {
+                                0%,
+                                11.5% {
+                                    opacity: 0;
+                                }
+                                12%,
+                                97% {
+                                    opacity: 1;
+                                }
+                                97.5%,
+                                100% {
+                                    opacity: 0;
+                                }
+                            }
+                            @keyframes showSlash {
+                                0%,
+                                17.5% {
+                                    opacity: 0;
+                                }
+                                18%,
+                                94% {
+                                    opacity: 1;
+                                }
+                                94.5%,
+                                100% {
+                                    opacity: 0;
+                                }
+                            }
+                            @keyframes showGT {
+                                0%,
+                                24.5% {
+                                    opacity: 0;
+                                }
+                                25%,
+                                90% {
+                                    opacity: 1;
+                                }
+                                90.5%,
+                                100% {
+                                    opacity: 0;
+                                }
+                            }
+
+                            @media (prefers-reduced-motion: reduce) {
+                                .symbol,
+                                .cursor {
+                                    animation: none;
+                                    opacity: 1;
+                                }
+                            }
+                        </style>
+
+                        <!-- Typed characters -->
+                        <line
+                            class="bar symbol pipe"
+                            x1="36"
+                            y1="14"
+                            x2="36"
+                            y2="106"
+                        ></line>
+                        <path class="symbol lt" d="M58 50 L44 60 L58 70"></path>
+                        <path class="symbol slash" d="M68 72 L74 48"></path>
+                        <path class="symbol gt" d="M84 50 L98 60 L84 70"></path>
+
+                        <!-- Cursor -->
+                        <line
+                            class="bar cursor"
+                            x1="36"
+                            y1="14"
+                            x2="36"
+                            y2="106"
+                        ></line>
+                    </svg>
+                </a>
+                <button class="topbar__menuBtn" data-menu-open>Menu</button>
+            </div>
+            <div class="topbar__divider"></div>
+        </header>
+
+        <main class="main post" data-post>
+            <header class="post__header">
+                <div class="kicker">About</div>
+                <h1 class="h1">Harsh Sharma</h1>
+                <p class="post__meta">
+                    Computer Science Student. Programmer. Problem-Solver.
+                </p>
+            </header>
+
+            <section class="post__layout">
+                <!-- Optional TOC (keeps layout consistent with your post template) -->
+                <aside class="post__toc card" data-toc>
+                    <div class="kicker">On this page</div>
+                    <nav data-toc-nav></nav>
+                </aside>
+
+                <div class="post__content">
+                    <h2 id="who-i-am">Who is Harsh?</h2>
+                    <p>
+                        I’m a 21 year old grad student pursuing a master’s
+                        degree at California State University, Chico, graduating
+                        in 2027. I started learning programming around age 12
+                        through Python courses and got hooked on building things
+                        and debugging the weird issues that show up along the
+                        way.
+                    </p>
+
+                    <h2 id="what-i-like-building">My Goals</h2>
+                    <p>
+                        I enjoy developing all types of software—projects where
+                        the goal is clear, the constraints are real, and the
+                        result is something people enjoy. I want to work on
+                        systems that feel fast, clean, and intentional.
+                    </p>
+
+                    <h2 id="links">Links</h2>
+                    <p>You can find me here.</p>
+                    <div
+                        style="
+                            display: flex;
+                            flex-wrap: wrap;
+                            gap: 10px;
+                            align-items: center;
+                        "
+                    >
+                        <a
+                            class="btn"
+                            href="https://linkedin.com/in/HarshTheSharma"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                        >
+                            LinkedIn
+                        </a>
+                        <a
+                            class="btn"
+                            href="https://github.com/harshthesharma"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                        >
+                            GitHub
+                        </a>
+                        <a class="btn" href="/cdn-cgi/l/email-protection#7a121b0809120e121f09121b08171b3a1d171b131654191517">
+                            Email
+                        </a>
+                    </div>
+
+                    <h2 id="projects">Projects</h2>
+                    <p>Checkout some of the work I have done so far.</p>
+                    <p>
+                        <a class="btn" href="/">See projects</a>
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer__inner">
+                <a class="footer__title" href="/">Harsh Sharma</a>
+            </div>
+        </footer>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"0a4c6448a2414c7faebefd98f975bdd0","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

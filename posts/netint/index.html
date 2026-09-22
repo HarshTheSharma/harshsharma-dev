@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link rel="icon" type="image/svg+xml" href="/media/favicon.svg" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>NetInt</title>
+
+        <link rel="stylesheet" href="/assets/css/tokens.css" />
+        <link rel="stylesheet" href="/assets/css/base.css" />
+        <link rel="stylesheet" href="/assets/css/components.css" />
+        <link rel="stylesheet" href="/assets/css/page.css" />
+        <link rel="stylesheet" href="/assets/css/post.css" />
+
+        <script defer src="/assets/js/main-handler.js"></script>
+        <script defer src="/assets/js/post-handler.js"></script>
+    </head>
+
+    <body>
+        <div class="overlay" data-menu hidden>
+        <div class="overlay__backdrop" data-menu-close></div>
+
+        <div
+            class="overlay__panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
+            tabindex="-1"
+            data-menu-panel
+        >
+            <div class="overlay__top">
+                <div class="overlay__title">Menu</div>
+                <button class="btn btn--small" type="button" data-menu-close>
+                    Close
+                </button>
+            </div>
+
+            <div class="overlay__search">
+                <label class="overlay__searchLabel" for="menu-post-search">
+                    Search posts
+                </label>
+                <input
+                    id="menu-post-search"
+                    type="search"
+                    placeholder="Search posts..."
+                    autocomplete="off"
+                    data-post-search
+                />
+                <div class="overlay__results" data-post-results></div>
+            </div>
+
+            <nav class="overlay__links" aria-label="Menu links"></nav>
+        </div>
+        </div>
+
+        <header class="topbar">
+            <div class="topbar__inner">
+                <a class="topbar__logo" href="/" aria-label="Home">
+                    <svg
+                        viewBox="0 0 140 120"
+                        xmlns="http://www.w3.org/2000/svg"
+                        role="img"
+                        aria-label="Typing logo"
+                    >
+                        <style>
+                            .bar {
+                                stroke: currentColor;
+                                stroke-width: 3;
+                                stroke-linecap: square;
+                            }
+                            .symbol {
+                                stroke: currentColor;
+                                fill: none;
+                                stroke-width: 5;
+                                stroke-linecap: square;
+                                stroke-linejoin: miter;
+                                opacity: 0;
+                            }
+
+                            .cursor {
+                                animation:
+                                    cursorBlink 1s steps(1) infinite,
+                                    cursorMove 14s steps(1, end) infinite;
+                                transform-box: fill-box;
+                                transform-origin: center;
+                            }
+                            /* --- Freeze-frame default (always) --- */
+                            .symbol {
+                                opacity: 1;
+                            } /* show all characters */
+                            .cursor {
+                                opacity: 1;
+                                transform: translateX(70px);
+                            } /* cursor after '&gt;' */
+
+                            /* --- Animate only when allowed --- */
+                            @media (prefers-reduced-motion: no-preference) {
+                                .symbol {
+                                    opacity: 0;
+                                } /* restore your animated behavior */
+                                .cursor {
+                                    animation:
+                                        cursorBlink 1s steps(1) infinite,
+                                        cursorMove 14s steps(1, end) infinite;
+                                    transform-box: fill-box;
+                                    transform-origin: center;
+                                }
+
+                                .pipe {
+                                    animation: showPipe 14s steps(1, end)
+                                        infinite;
+                                }
+                                .lt {
+                                    animation: showLT 14s steps(1, end) infinite;
+                                }
+                                .slash {
+                                    animation: showSlash 14s steps(1, end)
+                                        infinite;
+                                }
+                                .gt {
+                                    animation: showGT 14s steps(1, end) infinite;
+                                }
+                            }
+
+                            @keyframes cursorBlink {
+                                0%,
+                                49% {
+                                    opacity: 1;
+                                }
+                                50%,
+                                100% {
+                                    opacity: 0;
+                                }
+                            }
+
+                            /* Faster typing (done by 25%), same 5s hold, fast delete */
+                            @keyframes cursorMove {
+                                /* type (snappy jumps) */
+                                0% {
+                                    transform: translateX(0);
+                                } /* | */
+                                6% {
+                                    transform: translateX(15px);
+                                } /* before &lt; */
+                                12% {
+                                    transform: translateX(35px);
+                                } /* before / */
+                                18% {
+                                    transform: translateX(55px);
+                                } /* before &gt; */
+                                25% {
+                                    transform: translateX(70px);
+                                } /* after &gt; */
+
+                                /* hold (5s) */
+                                60.7% {
+                                    transform: translateX(70px);
+                                }
+
+                                /* tiny pause */
+                                68% {
+                                    transform: translateX(70px);
+                                }
+
+                                /* delete (fast) */
+                                90% {
+                                    transform: translateX(55px);
+                                }
+                                94% {
+                                    transform: translateX(35px);
+                                }
+                                97% {
+                                    transform: translateX(15px);
+                                }
+                                100% {
+                                    transform: translateX(0);
+                                }
+                            }
+
+                            /* Characters appear AFTER cursor lands */
+                            .pipe {
+                                animation: showPipe 14s steps(1, end) infinite;
+                            }
+                            .lt {
+                                animation: showLT 14s steps(1, end) infinite;
+                            }
+                            .slash {
+                                animation: showSlash 14s steps(1, end) infinite;
+                            }
+                            .gt {
+                                animation: showGT 14s steps(1, end) infinite;
+                            }
+
+                            @keyframes showPipe {
+                                0%,
+                                5.5% {
+                                    opacity: 0;
+                                }
+                                6%,
+                                99% {
+                                    opacity: 1;
+                                }
+                                99.5%,
+                                100% {
+                                    opacity: 0;
+                                }
+                            }
+                            @keyframes showLT {
+                                0%,
+                                11.5% {
+                                    opacity: 0;
+                                }
+                                12%,
+                                97% {
+                                    opacity: 1;
+                                }
+                                97.5%,
+                                100% {
+                                    opacity: 0;
+                                }
+                            }
+                            @keyframes showSlash {
+                                0%,
+                                17.5% {
+                                    opacity: 0;
+                                }
+                                18%,
+                                94% {
+                                    opacity: 1;
+                                }
+                                94.5%,
+                                100% {
+                                    opacity: 0;
+                                }
+                            }
+                            @keyframes showGT {
+                                0%,
+                                24.5% {
+                                    opacity: 0;
+                                }
+                                25%,
+                                90% {
+                                    opacity: 1;
+                                }
+                                90.5%,
+                                100% {
+                                    opacity: 0;
+                                }
+                            }
+
+                            @media (prefers-reduced-motion: reduce) {
+                                .symbol,
+                                .cursor {
+                                    animation: none;
+                                    opacity: 1;
+                                }
+                            }
+                        </style>
+
+                        <!-- Typed characters -->
+                        <line
+                            class="bar symbol pipe"
+                            x1="36"
+                            y1="14"
+                            x2="36"
+                            y2="106"
+                        ></line>
+                        <path class="symbol lt" d="M58 50 L44 60 L58 70"></path>
+                        <path class="symbol slash" d="M68 72 L74 48"></path>
+                        <path class="symbol gt" d="M84 50 L98 60 L84 70"></path>
+
+                        <!-- Cursor -->
+                        <line
+                            class="bar cursor"
+                            x1="36"
+                            y1="14"
+                            x2="36"
+                            y2="106"
+                        ></line>
+                    </svg>
+                </a>
+                <button class="topbar__menuBtn" data-menu-open>Menu</button>
+            </div>
+            <div class="topbar__divider"></div>
+        </header>
+
+        <main class="main post" data-post>
+            <header class="post__header">
+                <div class="kicker">DoE Fellowship</div>
+                <h1 class="h1">NetInt</h1>
+                <p class="post__meta">
+                    A secure multi-party computation (MPC) library for C++.
+                </p>
+            </header>
+
+            <section class="post__layout">
+                <aside class="post__toc card" data-toc>
+                    <div class="kicker">On this page</div>
+                    <nav data-toc-nav></nav>
+                </aside>
+
+                <div class="post__content">
+                    <h2 id="overview">Overview</h2>
+                    <p>
+                        NetInt is a secure multi-party computation (MPC) library
+                        for C++ developed in an academic research setting under
+                        a U.S. Department of Energy fellowship. It enables
+                        privacy-preserving integer computation. Programs written
+                        with <code>NetInt</code> can perform arithmetic and
+                        comparisons without revealing raw values to any single
+                        participant. The library uses a primary script that
+                        coordinates work across multiple agents over a
+                        socket-based protocol.
+                    </p>
+
+                    <h2 id="design">Design</h2>
+                    <p>
+                        NetInt follows a primary–agent architecture. A primary
+                        process runs the target program, while three agents
+                        connect to participate in secure evaluation of
+                        operations. Network access can be restricted using IP
+                        whitelisting, and message verbosity can be suppressed
+                        for cleaner output. The interface is intentionally
+                        lightweight: replacing standard integers with
+                        <code>NetInt</code> allows many existing C++ programs to
+                        run with minimal structural changes.
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>Secure integer type:</strong> addition,
+                            subtraction, multiplication, comparisons.
+                        </li>
+                        <li>
+                            <strong>Socket protocol:</strong> agents connect to
+                            the primary on a chosen port.
+                        </li>
+                        <li>
+                            <strong>Controls:</strong> optional message
+                            suppression and IP whitelist.
+                        </li>
+                        <li>
+                            <strong>Repo layout:</strong> standalone
+                            implementations for easier debugging and testing.
+                        </li>
+                    </ul>
+
+                    <h2 id="implementation">Implementation</h2>
+                    <p>
+                        The core implementation lives in
+                        <code>NetInt.h</code> and the agent communication logic
+                        in <code>agent.c</code>. Sample programs demonstrate
+                        library usage on real algorithms and workflows.
+                    </p>
+
+                    <h3>Build</h3>
+                    <pre><code>make</code></pre>
+
+                    <h3>Library usage</h3>
+                    <ol>
+                        <li>
+                            Copy <code>NetInt.h</code> (and the
+                            <code>openssl/</code> folder) into your project.
+                        </li>
+                        <li>
+                            Include the header: <code>#include "NetInt.h"</code>
+                        </li>
+                        <li>(Optional) <code>hideMessages(true);</code></li>
+                        <li>
+                            (Optional) <code>setWhitelist({"IP1","IP2"});</code>
+                        </li>
+                        <li>
+                            Establish the port <em>before</em> declaring any
+                            <code>NetInt</code> variables:
+                            <code>establishPort("8081");</code>
+                        </li>
+                    </ol>
+
+                    <h3>Run</h3>
+                    <p>Start the primary program (example):</p>
+                    <pre><code>./sample</code></pre>
+                    <p>Then connect three agents:</p>
+                    <pre><code>./agent &lt;primary-ip&gt; &lt;port&gt;</code></pre>
+                    <p>Local testing:</p>
+                    <pre><code>./agent 127.0.0.1 &lt;port&gt;</code></pre>
+
+                    <h2 id="final-deployment">Final Deployment</h2>
+                    <p>
+                        The final deliverable is a header-based C++ library plus
+                        agent binaries and example programs. The repository also
+                        includes standalone versions intended to make
+                        development and debugging easier before integrating
+                        changes into the library.
+                    </p>
+
+                    <h3>File structure</h3>
+                    <ul>
+                        <li>
+                            <code>NetInt.h</code> — Secure integer type and MPC
+                            context
+                        </li>
+                        <li>
+                            <code>agent.c</code> — Agent communication logic
+                        </li>
+                        <li>
+                            <code>sample.cpp</code>, <code>sample2.cpp</code>,
+                            <code>sample3.cpp</code> — Example applications
+                        </li>
+                        <li><code>Makefile</code> — Build instructions</li>
+                        <li>
+                            <code>Local Standalone/</code> — Object-oriented
+                            crypto function implementations
+                        </li>
+                        <li>
+                            <code>Networked Standalone/</code> — Server-like
+                            networked implementation for testing
+                        </li>
+                    </ul>
+
+                    <h3>Possible improvements</h3>
+                    <ul>
+                        <li>
+                            Replace <code>rand()</code> with a cryptographically
+                            secure RNG.
+                        </li>
+                        <li>
+                            Improve negative number handling (see
+                            <code>sample3</code>).
+                        </li>
+                        <li>Add secure division.</li>
+                        <li>Add secure modulo.</li>
+                        <li>
+                            Store values as share arrays rather than raw values
+                            to reduce split/reconstruct cycles (tradeoff:
+                            reconstruction needed when returning raw values).
+                        </li>
+                    </ul>
+                    <h2>Repository</h2>
+                    <p>Checkout the current state of the project on GitHub.</p>
+                    <p>
+                        <a
+                            class="btn"
+                            href="https://github.com/HarshTheSharma/NetInt"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                        >
+                            NetInt on GitHub
+                        </a>
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer__inner">
+                <a class="footer__title" href="/">Harsh Sharma</a>
+            </div>
+        </footer>
+    </body>
+</html>
