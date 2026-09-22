@@ -1,0 +1,18 @@
+:root {
+    --bg: #000;
+    --text: rgba(255, 255, 255, 0.92);
+    --muted: rgba(255, 255, 255, 0.7);
+
+    --panel: rgba(255, 255, 255, 0.03);
+    --line: rgba(255, 255, 255, 0.28);
+    --line-strong: rgba(255, 255, 255, 0.55);
+
+    --radius-lg: 18px;
+    --radius-md: 12px;
+
+    --pad: 16px;
+    --max: 1100px;
+
+    --h1: clamp(28px, 4vw, 44px);
+    --h2: 20px;
+}

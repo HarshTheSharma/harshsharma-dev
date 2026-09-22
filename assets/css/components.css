@@ -1,0 +1,79 @@
+.kicker {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.h1 {
+    font-size: var(--h1);
+    margin: 10px 0 6px;
+    font-weight: 600;
+    line-height: 1.15;
+}
+
+.h2 {
+    font-size: var(--h2);
+    margin: 10px 0 8px;
+    font-weight: 500;
+}
+
+.p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--panel);
+    padding: var(--pad);
+    backdrop-filter: blur(6px);
+}
+
+.cardLink {
+    display: block;
+    cursor: pointer;
+}
+
+.cardLink:hover {
+    border-color: rgba(255, 255, 255, 0.75);
+}
+
+.cardLink:active {
+    transform: translateY(1px);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.btn:hover {
+    border-color: rgba(255, 255, 255, 0.85);
+}
+
+.linkList {
+    display: grid;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.linkRow {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.linkRow:hover {
+    border-color: rgba(255, 255, 255, 0.75);
+}

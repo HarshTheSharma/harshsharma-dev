@@ -1,0 +1,245 @@
+.topbar,
+.footer {
+    background: #000;
+    background-image: none;
+}
+
+.main {
+    flex: 1;
+    width: 100%;
+    padding: 28px 0 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #000;
+    background-image: url("/media/background.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+
+    border-radius: var(--radius-lg);
+    position: relative;
+}
+
+.main > * {
+    width: min(var(--max), 92vw);
+}
+
+.main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0.18;
+    background-image:
+        linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px
+        );
+    background-size: 32px 32px;
+    mask-image: radial-gradient(circle at 30% 0%, black 0%, transparent 60%);
+}
+
+.grid {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 16px;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #000;
+}
+
+.topbar__inner {
+    width: min(var(--max), 92vw);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.topbar__link {
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.topbar__logo {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+}
+
+.logoMark {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.topbar__menuBtn {
+    border: 1px solid var(--line-strong);
+    background: transparent;
+    color: var(--text);
+    border-radius: 999px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.topbar__menuBtn:hover {
+    border-color: rgba(255, 255, 255, 0.85);
+}
+
+.topbar__divider {
+    height: 2px;
+    background: rgba(255, 255, 255, 0.9);
+    opacity: 0.75;
+}
+
+.footer {
+    background: #000;
+    margin-top: auto;
+}
+
+.footer__inner {
+    border-top: 3px solid rgba(255, 255, 255, 0.9);
+    padding: 18px 0;
+    text-align: center;
+}
+
+.footer__title {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+}
+
+.overlay__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.overlay__panel {
+    position: absolute;
+    right: min(4vw, 22px);
+    top: 86px;
+    width: min(520px, 92vw);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-lg);
+    background: rgba(0, 0, 0, 0.85);
+    padding: 14px;
+    backdrop-filter: blur(10px);
+}
+
+.overlay__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.overlay__title {
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.overlay__links {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.overlay__link {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.overlay__link:hover {
+    border-color: rgba(255, 255, 255, 0.85);
+}
+.overlay__search {
+    margin: 14px 0 10px;
+    display: grid;
+    gap: 6px;
+}
+.overlay__searchLabel {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.overlay__search input {
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line-strong);
+    background: rgba(0, 0, 0, 0.35);
+    color: var(--text);
+}
+.overlay__results {
+    display: grid;
+    gap: 8px;
+}
+.overlay__result {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.35);
+}
+.overlay__result:hover {
+    border-color: rgba(255, 255, 255, 0.75);
+}
+
+.overlay__result--meta {
+    border-style: dashed;
+    color: var(--muted);
+}
+
+.overlay__result--meta:hover {
+    border-color: var(--line);
+}
+
+.topbar__logo {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0; /* prevents baseline/descender spacing */
+}
+
+.topbar__logo svg {
+    width: 45px; /* adjust as needed */
+    height: 45px;
+    display: block; /* prevents inline SVG whitespace issues */
+    flex: 0 0 auto; /* don’t let flex stretch/shrink it */
+    overflow: visible; /* allow caret to extend without clipping */
+}
